@@ -1,0 +1,12 @@
+<h5>Name: <%= @todo.name %></h5>
+<h5>Description: <%= @todo.description %></h5>
+<h5>Current Assignee: <%= @todo.try(:user).try(:name) %></h5>
+<%= form_for @todo, :url => project_todo_path do |f| %>
+    <div class="form-group">
+      <%= f.label :user_id, 'Select New Assignee' %>
+      <%= f.select :user_id, user_collection, {}, class: "form-control" %>
+    </div>
+    <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+    |
+    <%= link_to 'Back', project_path(@todo.project), class: 'btn btn-danger' %>
+<% end %>

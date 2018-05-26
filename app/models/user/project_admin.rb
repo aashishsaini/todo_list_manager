@@ -1,0 +1,2 @@
+class ProjectAdmin < User
+end

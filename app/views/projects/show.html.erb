@@ -1,0 +1,35 @@
+<h1><%= @project.name %></h1>
+<div id='chart'><% get_charts %></div>
+<%= render_chart(@chart, 'chart') %>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <td>Todo Name</td>
+      <td>Todo Description</td>
+      <td>Todo Status</td>
+      <td>Assigned To</td>
+      <td>Modify</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% (@todos ? @todos : @project.todos).includes(:user).each do |todo| %>
+      <tr>
+        <td><%= todo.name %></td>
+        <td><%= todo.description %></td>
+        <td><%= todo.status %></td>
+        <td><%= todo.try(:user).try(:name) %></td>
+        <td>
+          <%= link_to 'Status', edit_project_todo_path(@project,todo) if can?(:update, todo) %>
+          <% if can?(:update, @project) %>
+            |
+            <%= link_to 'Assignee', assign_user_project_todo_path(@project,todo) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="5" class="text-center"><%= link_to 'Add Todo to Project', new_project_todo_path(@project) if can?(:update, @project) && @projects.nil? %></td>
+    </tr>
+  </tbody>
+</table>

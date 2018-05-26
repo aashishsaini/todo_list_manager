@@ -1,0 +1,9 @@
+<h5>Name: <%= @todo.name %></h5>
+<h5>Description: <%= @todo.description %></h5>
+<h5>Current Status: <%= @todo.status %></h5>
+<h5>Modify Status</h5>
+<%= form_for @todo, :url => project_todo_path do |f| %>
+    <%= f.select :status, STATUS.values %>
+    <%= submit_tag %>
+<% end %>
+<%= link_to 'Back', project_path(@todo.project) %>

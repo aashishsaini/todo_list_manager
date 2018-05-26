@@ -1,0 +1,23 @@
+<h1>'<%= @todo.project.name %>' TODO list</h1>
+<%= form_for @todo, :url => project_todos_path do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name,class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description ,class: "form-control" , resize: 'none' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status %>
+    <%= f.select :status, STATUS.values, {}, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.select :user_id, user_collection, {}, class: "form-control" %>
+  </div>
+  <%= f.hidden_field :project_id %>
+  <%= submit_tag 'Submit', class: 'btn btn-primary' %>
+  |
+  <%= link_to 'Cancel', project_path(@todo.project), class: 'btn btn-danger' %>
+<% end %>

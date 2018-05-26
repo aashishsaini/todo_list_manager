@@ -1,0 +1,20 @@
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <% @projects.uniq.each do |project| %>
+        <th><%= project.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% developer_results.each do |status, todos| %>
+      <tr>
+        <td><%= status %></td>
+        <% todos.each do |project_todo| %>
+          <td><%= (project_todo.compact.map(&:name).join("<br>").html_safe) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
