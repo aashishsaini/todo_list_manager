@@ -20,4 +20,4 @@
   <%= submit_tag 'Submit', class: 'btn btn-primary' %>
   |
   <%= link_to 'Cancel', project_path(@todo.project), class: 'btn btn-danger' %>
-<% end %>
+<% end if can?(:update, @todo)%>

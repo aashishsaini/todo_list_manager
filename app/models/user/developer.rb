@@ -1,3 +1,1 @@
-class Developer < User
-
-end
+class Developer < User; end

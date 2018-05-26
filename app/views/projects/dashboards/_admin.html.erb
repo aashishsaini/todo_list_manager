@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>Status</th>
-      <% @projects.map(&:users).flatten.uniq.each do |user| %>
+      <% @projects.map(&:developers).flatten.uniq.each do |user| %>
         <th><%= user.name %></th>
       <% end %>
     </tr>

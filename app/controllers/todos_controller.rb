@@ -1,10 +1,13 @@
 class TodosController < ApplicationController
   load_and_authorize_resource
-
   before_action :initialize_todo, except: [:create]
+
+  # methods that only needs initialize objects
   def edit; end
   def new; end
+  def assign_user; end
 
+  # will create a new task to the project list
   def create
     @todo = Todo.new(todo_params)
     if @todo.save
@@ -16,6 +19,7 @@ class TodosController < ApplicationController
     end
   end
 
+  # used to updated the task with status only
   def update
     if @todo.update(todo_params)
       flash[:success] = 'Status Updated Successfully'
@@ -25,8 +29,6 @@ class TodosController < ApplicationController
     redirect_to project_path(@todo.project)
   end
 
-  def assign_user; end
-
   private
   def initialize_todo
     @todo = params[:id].present? ? Todo.find(params[:id]) : Todo.new(project_id: params[:project_id])
@@ -35,5 +37,4 @@ class TodosController < ApplicationController
   def todo_params
     params.require(:todo).permit(:status, :name, :description, :project_id, :user_id)
   end
-
 end

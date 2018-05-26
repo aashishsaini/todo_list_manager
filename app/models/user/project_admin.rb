@@ -1,2 +1,1 @@
-class ProjectAdmin < User
-end
+class ProjectAdmin < User; end
